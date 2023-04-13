@@ -12,7 +12,7 @@ const Header = () => {
 			<div className='headerRight'>
             <div className='cart'>
             <AiOutlineShoppingCart/>
-            <span class='cartCount'>0</span>
+            <span className='cartCount'>0</span>
             </div>
          </div>
 		</header>
