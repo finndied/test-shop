@@ -133,3 +133,47 @@ body {
 	-moz-osx-font-smoothing: grayscale;
 	background-color: rgb(255, 255, 255);
 }
+
+header {
+	background-color: #000000;
+	position: fixed;
+	display: flex;
+	z-index: 100;
+	width: 100%;
+	justify-content: space-between;
+	align-items: center;
+	padding: 15px 0;
+
+	.headerLeft {
+		font-size: 22px;
+		font-weight: 700;
+		color: white;
+		display: flex;
+		align-items: center;
+	}
+	img {
+		margin: 0px 10px 0px 30px;
+	}
+
+	.headerRight {
+		display: flex;
+		.cart {
+			margin-top: 5px;
+			cursor: pointer;
+			color: #ffffff;
+			font-size: 25px;
+			margin-right: 30px;
+			position: relative;
+			.cartCount {
+				position: absolute;
+				top: 12px;
+				right: -11px;
+				background-color: #00b1a3;
+				color: white;
+				border-radius: 50%;
+				padding: 4px 6px;
+				font-size: 9px;
+			}
+		}
+	}
+}
