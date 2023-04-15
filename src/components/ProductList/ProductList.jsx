@@ -8,6 +8,8 @@ import BrandFilter from '../BrandFilter/BrandFilter'
 const ProductList = () => {
 	const [products, setProducts] = useState([])
 	const [selectedBrands, setSelectedBrands] = useState([])
+	const [currentPage, setCurrentPage] = useState(1)
+	const productsPerPage = 6
 
 	useEffect(() => {
 		setProducts(dataProduct)
@@ -15,6 +17,11 @@ const ProductList = () => {
 
 	const handleBrandChange = brands => {
 		setSelectedBrands(brands)
+		setCurrentPage(1)
+	}
+
+	const handlePageChange = pageNumber => {
+		setCurrentPage(pageNumber)
 	}
 
 	// Фильтрация товаров по выбранным брендам
@@ -28,12 +35,30 @@ const ProductList = () => {
 		}
 	})
 
+	// Вычисление индексов первого и последнего товаров на текущей странице
+	const indexOfLastProduct = currentPage * productsPerPage
+	const indexOfFirstProduct = indexOfLastProduct - productsPerPage
+	const currentProducts = filteredProducts.slice(
+		indexOfFirstProduct,
+		indexOfLastProduct
+	)
+
+	// Рендеринг пагинации
+	const pageNumbers = []
+	for (
+		let i = 1;
+		i <= Math.ceil(filteredProducts.length / productsPerPage);
+		i++
+	) {
+		pageNumbers.push(i)
+	}
+
 	return (
 		<div className={styles.productWrapper}>
 			<BrandFilter brands={dataBrands} onBrandChange={handleBrandChange} />
-			{filteredProducts.length > 0 ? (
+			{currentProducts.length > 0 ? (
 				<div className={styles.productList}>
-					{filteredProducts.map(product => (
+					{currentProducts.map(product => (
 						<div className={styles.card} key={product.id}>
 							<h2 className={styles.productTitle}>{product.title}</h2>
 							<img src={product.image} width={160} alt={product.title} />
@@ -50,6 +75,21 @@ const ProductList = () => {
 				</div>
 			) : (
 				<h2>Товаров выбранного бренда нет :(</h2>
+			)}
+			{pageNumbers.length > 1 && (
+				<div className={styles.pagination}>
+					{pageNumbers.map(pageNumber => (
+						<span
+							key={pageNumber}
+							className={`${styles.pageNumber} ${
+								pageNumber === currentPage ? styles.active : ''
+							}`}
+							onClick={() => handlePageChange(pageNumber)}
+						>
+							{pageNumber}
+						</span>
+					))}
+				</div>
 			)}
 		</div>
 	)
