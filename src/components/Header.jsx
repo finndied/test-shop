@@ -1,9 +1,14 @@
-import React from 'react'
+import React, { useEffect, useState } from 'react'
 
 import { AiOutlineShoppingCart } from 'react-icons/ai'
 import { Link } from 'react-router-dom'
 
-const Header = () => {
+const Header = ({ cartItems }) => {
+	const [cartCount, setCartCount] = useState(0)
+	// Обновляем количество товаров в корзине, когда изменяется состояние корзины
+	useEffect(() => {
+		setCartCount(cartItems.reduce((acc, item) => acc + item.quantity, 0))
+	}, [cartItems])
 	return (
 		<header>
 			<div className='headerLeft'>
@@ -16,7 +21,7 @@ const Header = () => {
 				<Link to='/cart'>
 					<div className='cart'>
 						<AiOutlineShoppingCart />
-						<span className='cartCount'>0</span>
+						<span className='cartCount'>{cartCount}</span>
 					</div>
 				</Link>
 			</div>

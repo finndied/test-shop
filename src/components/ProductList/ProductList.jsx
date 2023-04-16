@@ -5,7 +5,7 @@ import styles from './ProductList.module.scss'
 import { AiOutlineShoppingCart } from 'react-icons/ai'
 import BrandFilter from '../BrandFilter/BrandFilter'
 
-const ProductList = () => {
+const ProductList = ({ handleAddToCart }) => {
 	const [products, setProducts] = useState([])
 	const [selectedBrands, setSelectedBrands] = useState([])
 	const [currentPage, setCurrentPage] = useState(1)
@@ -66,7 +66,7 @@ const ProductList = () => {
 								<p>
 									{product.regular_price.value} {product.regular_price.currency}
 								</p>
-								<button>
+								<button onClick={() => handleAddToCart(product)}>
 									<AiOutlineShoppingCart />
 								</button>
 							</div>
