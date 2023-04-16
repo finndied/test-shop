@@ -25,6 +25,10 @@ function App() {
 		newCartItems.splice(index, 1)
 		setCartItems(newCartItems)
 		}
+  // Очищение корзины после заказа  
+    const handleClearCart = () => {
+      setCartItems([])
+    }
 	return (
 		<Router>
 			<div className='App'>
@@ -39,7 +43,7 @@ function App() {
 							/>
 						}
 					/>
-					<Route path='/cart' element={<Cart cartItems={cartItems} handleDelete={handleDelete}/>} />
+					<Route path='/cart' element={<Cart cartItems={cartItems} handleDelete={handleDelete} handleClearCart={handleClearCart}/>} />
 				</Routes>
 			</div>
 		</Router>
