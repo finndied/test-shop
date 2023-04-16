@@ -2,6 +2,8 @@
 	display: flex;
 	justify-content: center;
 	flex-wrap: wrap;
+	margin: 10px;
+	gap: 30px;
 }
 
 .emptyCart {
@@ -87,7 +89,6 @@
 	border-radius: 12px;
 	display: flex;
 	gap: 30px;
-	margin-top: 0%;
 	margin-left: 10%;
 	flex-direction: column;
 	justify-content: center;
@@ -118,12 +119,20 @@
 	}
 }
 
+@media screen and (max-width: 800px) {
+	.order {
+		box-shadow: 1px 5px 30px 5px rgba(0, 0, 0, 0.25), 0 10px 10px rgba(0, 0, 0, 0.22);
+		margin-bottom: 30px;
+		margin-left: 0%;
+	}
+}
+
 .modal {
 	display: flex;
 	align-items: center;
 	justify-content: center;
-	position: absolute;
-	margin: 50px auto;
+	position: fixed;
+	margin: auto auto;
 	width: 300px;
 	height: 300px;
 	border: 1px solid rgb(173, 173, 173);

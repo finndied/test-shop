@@ -19,16 +19,16 @@ function App() {
 			}
 		})
 	}
-  // Удаление товара из корзины
-  const handleDelete = index => {
+	// Удаление товара из корзины
+	const handleDelete = index => {
 		const newCartItems = [...cartItems]
 		newCartItems.splice(index, 1)
 		setCartItems(newCartItems)
-		}
-  // Очищение корзины после заказа  
-    const handleClearCart = () => {
-      setCartItems([])
-    }
+	}
+	// Очищение корзины после заказа
+	const handleClearCart = () => {
+		setCartItems([])
+	}
 	return (
 		<Router>
 			<div className='App'>
@@ -43,7 +43,16 @@ function App() {
 							/>
 						}
 					/>
-					<Route path='/cart' element={<Cart cartItems={cartItems} handleDelete={handleDelete} handleClearCart={handleClearCart}/>} />
+					<Route
+						path='/cart'
+						element={
+							<Cart
+								cartItems={cartItems}
+								handleDelete={handleDelete}
+								handleClearCart={handleClearCart}
+							/>
+						}
+					/>
 				</Routes>
 			</div>
 		</Router>
