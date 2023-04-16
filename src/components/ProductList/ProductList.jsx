@@ -10,7 +10,7 @@ const ProductList = ({ handleAddToCart }) => {
 	const [selectedBrands, setSelectedBrands] = useState([])
 	const [currentPage, setCurrentPage] = useState(1)
 	const productsPerPage = 6
-
+	const [searchInput, setSearchInput] = useState('')
 	useEffect(() => {
 		setProducts(dataProduct)
 	}, [])
@@ -27,11 +27,12 @@ const ProductList = ({ handleAddToCart }) => {
 	// Фильтрация товаров по выбранным брендам
 	const filteredProducts = products.filter(product => {
 		if (selectedBrands.length === 0) {
-			// Если ни один бренд не выбран, показать все товары
-			return true
+			return product.title.toLowerCase().includes(searchInput.toLowerCase())
 		} else {
-			// Если выбраны бренды, показать только товары, соответствующие выбранным брендам
-			return selectedBrands.includes(product.brand)
+			return (
+				selectedBrands.includes(product.brand) &&
+				product.title.toLowerCase().includes(searchInput.toLowerCase())
+			)
 		}
 	})
 
@@ -56,6 +57,14 @@ const ProductList = ({ handleAddToCart }) => {
 	return (
 		<div className={styles.productWrapper}>
 			<BrandFilter brands={dataBrands} onBrandChange={handleBrandChange} />
+			<div className={styles.searchWrapper}>
+				<input
+					type='text'
+					placeholder='Поиск товара'
+					value={searchInput}
+					onChange={e => setSearchInput(e.target.value)}
+				/>
+			</div>
 			{currentProducts.length > 0 ? (
 				<div className={styles.productList}>
 					{currentProducts.map(product => (
